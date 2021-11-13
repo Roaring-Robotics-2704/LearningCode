@@ -31,7 +31,7 @@ public class Drivetrain extends SubsystemBase {
         //process joystick input
         //command motors
         double forwardInput = RobotContainer.controller.getY();
-        double turnInput = RobotContainer.controller.getX();
+        double turnInput = RobotContainer.controller.getZ();
 
         double processedInput = processInput(forwardInput);
 

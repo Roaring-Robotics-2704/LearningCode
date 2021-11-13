@@ -15,5 +15,5 @@ public final class Constants {
     static public double deadBand = 0.05;
     static public double inputScaling = 2;
 
-    static public int driveControllerPort = 1;
+    static public int driveControllerPort = 0;
 }

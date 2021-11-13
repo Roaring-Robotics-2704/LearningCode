@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
@@ -22,7 +23,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  static public XboxController controller = new XboxController(Constants.driveControllerPort);
+  static public Joystick controller = new Joystick(Constants.driveControllerPort);
 
   static public PWMVictorSPX leftMotors = new PWMVictorSPX(RobotMap.leftMotor);
   static public PWMVictorSPX rightMotors = new PWMVictorSPX(RobotMap.rightMotor);
