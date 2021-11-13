@@ -32,9 +32,7 @@ public class ArmChangeState extends CommandBase {
         //Move towards target
         m_subsystem.moveArm();
         //IsFinished()?
-    }
-
-    // Called once the command ends or is interrupted.
+    }    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
 
