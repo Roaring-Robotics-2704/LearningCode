@@ -24,7 +24,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   static public Joystick controller = new Joystick(Constants.driveControllerPort);
-
+  //These motor controllers are incorrect - we are using CAN
   static public PWMVictorSPX leftMotors = new PWMVictorSPX(RobotMap.leftMotor);
   static public PWMVictorSPX rightMotors = new PWMVictorSPX(RobotMap.rightMotor);
 
