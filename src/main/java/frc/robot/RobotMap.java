@@ -1,6 +1,6 @@
 package frc.robot;
 //List of all robot ports
-public class RobotMap {
+public class
     //Arm
     public static int armEncoderPort = 0;
     public static int armMotor = 2;

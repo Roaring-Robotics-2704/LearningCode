@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hatch;
 
 /** An example command that uses an example subsystem. */
-public class HatchChangeState extends CommandBase {
+public class
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Hatch m_subsystem;
 

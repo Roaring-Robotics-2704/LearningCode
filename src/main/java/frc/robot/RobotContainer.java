@@ -28,7 +28,6 @@ public class RobotContainer {
   static public PWMVictorSPX rightMotors = new PWMVictorSPX(RobotMap.rightMotor);
 
 
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings

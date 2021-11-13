@@ -8,7 +8,6 @@ public class Drivetrain extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
 
     public Drivetrain() {
-
     }
 
     private double processInput(double joystickValue) {
