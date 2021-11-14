@@ -1,46 +1,33 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hatch;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.Constants;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.HatchSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class HatchChangeState extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Hatch m_subsystem;
 
+    private final HatchSubsystem m_hatch;
     /**
-     * Creates a new ExampleCommand.
+     * Moves the arm to the specified angle
      *
-     * @param subsystem The subsystem used by this command.
+     * @param hatch The hatch subsystem
      */
-    public HatchChangeState(Hatch subsystem) {
-        m_subsystem = subsystem;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+    public HatchChangeState(HatchSubsystem hatch) {
+        m_hatch = hatch;
     }
 
-    // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
+    public void execute()
+    {
+        m_hatch.setAngle();
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        //Identify target state
-        //Move towards target
-        //IsFinished()?
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {}
-
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        //Have we reached the target state?
-        //Update current state
-        return false;
+        return m_hatch.atTargetState();
     }
 }

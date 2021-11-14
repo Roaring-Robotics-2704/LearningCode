@@ -1,46 +1,47 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.Constants;
+import frc.robot.subsystems.ArmSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class ArmChangeState extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Arm m_subsystem;
+public class ArmChangeState extends PIDCommand {
 
+    private final ArmSubsystem m_arm;
     /**
-     * Creates a new ExampleCommand.
+     * Moves the arm to the specified angle
      *
-     * @param subsystem The subsystem used by this command.
+     * @param targetAngleDegrees The angle to turn to
+     * @param arm The arm subsystem
      */
-    public ArmChangeState(Arm subsystem) {
-        m_subsystem = subsystem;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+    public ArmChangeState(ArmSubsystem arm) {
+        super(
+                new PIDController(Constants.ArmConstants.kP, Constants.ArmConstants.kI, Constants.ArmConstants.kD),
+                // Close loop on angle of the arm
+                arm::getAngle,
+                // Set reference to target
+                arm.getNewTargetDegrees(),
+                // Pipe output to move the arm
+                arm::driveArm,
+                // Require the arm subsystem
+                arm);
+
+        // Our arm can't freely spin, so disable continous outputs
+        getController().disableContinuousInput();
+        // Set the controller tolerance - the delta tolerance ensures the arm is stationary at the
+        // setpoint before it is considered as having reached the reference
+        getController()
+                .setTolerance(Constants.ArmConstants.kDegreeTolerance, Constants.ArmConstants.kTurnRateToleranceDegPerS);
+        m_arm = arm;
     }
 
-    // Called when the command is initially scheduled.
-    @Override
-    public void initialize() {
-    }
-
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        //Identify target state
-        //Move towards target
-        m_subsystem.moveArm();
-        //IsFinished()?
-    }    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {}
-
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        //Have we reached the target state?
-        //Update current state
+        if(getController().atSetpoint()) {
+            m_arm.updateState();
+            return true;
+        }
         return false;
     }
 }
